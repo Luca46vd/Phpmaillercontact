@@ -85,15 +85,51 @@ if (!empty($_POST)) {
                         
                     // Success sent message alert
                     $mail->send();
-              
+                    echo
+                    " 
+                    <script> 
+                    alert('Message was sent successfully!');
+                    document.location.href = 'index.php';
+                    </script>
+                    ";
           
             }
             else 
             {
-                mail('luca.vidiri2005@gmail.com','Message provenant de votre formulaire contact',$message, 'luca.vidiri2005@gmail.com');
-            }
+                //Server settings
+                $mail->isSMTP();                              //Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';       //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;             //Enable SMTP authentication
+                $mail->Username   = 'luca.vidiri2005@gmail.com';   //SMTP write your email
+                $mail->Password   = 'fnbftkefdmkojojv';      //SMTP password
+                $mail->SMTPSecure = 'ssl';            //Enable implicit SSL encryption
+                $mail->Port       = 465;                                    
 
-        }
+                //Recipients
+
+                $mail->setFrom('lucareseausocial@gmail.com', $_POST["name"]);
+                $mail->addAddress('luca.vidiri2005@gmail.com');     //Add a recipient email  
+                $mail->addReplyTo($_POST["email"], $_POST["name"]); // reply to sender email
+                    
+
+                //Content
+                $mail->isHTML(true);               //Set email format to HTML
+                $mail->Subject = 'Ce message provient du formulaire de contact de votre site ';   // email subject headings
+                $mail->Body    = $message; //email message
+
+                // Success sent message alert
+                $mail->send();
+                echo
+                " 
+                <script> 
+                alert('Message was sent successfully!');
+                document.location.href = 'index.php';
+                </script>
+                ";
+            }
+    }
+
+    
 
     }
 ?>
