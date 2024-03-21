@@ -50,12 +50,6 @@ if (!empty($_POST)) {
             
                   //required files
             
-                    $message = "Ce message provient du formulaire de contact de votre site <br>
-                    Nom : " . $_POST['nom'] . " <br>
-                    Numero : ". $_POST['phone'] ." <br>
-                    Email : " . $_POST['email'] . " <br>
-                    Message : " . $_POST['message'];
-            
                     $mail = new PHPMailer(true);
                     
                     //Server settings
@@ -96,6 +90,9 @@ if (!empty($_POST)) {
             }
             else 
             {
+
+                $mail = new PHPMailer(true);
+
                 //Server settings
                 $mail->isSMTP();                              //Send using SMTP
                 $mail->Host       = 'smtp.gmail.com';       //Set the SMTP server to send through
